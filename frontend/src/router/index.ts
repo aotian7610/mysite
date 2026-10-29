@@ -13,11 +13,13 @@ import { useRoutePrefetch } from '@/composables/useRoutePrefetch'
 import { getSetupStatus } from '@/api/setup'
 import { resolveCompletedSetupRedirectPath } from './setupRedirect'
 import { resolveRouteDocumentTitle } from './title'
+import { invoiceRoutes } from '@/features/invoices/routes'
 
 /**
  * Route definitions with lazy loading
  */
 const routes: RouteRecordRaw[] = [
+  ...invoiceRoutes,
   // ==================== Setup Routes ====================
   {
     path: '/setup',
@@ -949,6 +951,8 @@ router.beforeEach(async (to, _from, next) => {
   // 简易模式下限制访问某些页面
   if (authStore.isSimpleMode) {
     const restrictedPaths = [
+      '/invoices',
+      '/admin/invoices',
       '/admin/subscriptions',
       '/admin/redeem',
       '/subscriptions',
